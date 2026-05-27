@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RZ_JOIAS | Catálogo Premium</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #d4af37; 
+            --bg: #050505;
+            --card-gradient: radial-gradient(circle, #222 0%, #0a0a0a 100%);
+            --text-light: #ffffff;
+            --text-muted: #888;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-light);
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Header de Luxo */
+        header {
+            height: 50vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: radial-gradient(circle, #1a1a1a 0%, #050505 100%);
+            position: relative;
+        }
+
+        header h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 3rem;
+            color: var(--primary);
+            letter-spacing: 8px;
+            margin-bottom: 5px;
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+        }
+
+        header::after {
+            content: '';
+            width: 50px;
+            height: 2px;
+            background: var(--primary);
+            margin-top: 15px;
+        }
+
+        /* Seções */
+        .category-section { padding: 40px 15px; }
+
+        .category-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 30px;
+            text-align: center;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        /* Card com Efeito Spotlight */
+        .product-card {
+            background: var(--card-gradient);
+            border-radius: 20px;
+            padding: 15px;
+            text-decoration: none;
+            color: inherit;
+            text-align: center;
+            border: 1px solid #1a1a1a;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-card:active { transform: scale(0.95); border-color: var(--primary); }
+
+        .img-wrapper {
+            width: 100%;
+            aspect-ratio: 1/1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            margin-bottom: 10px;
+        }
+
+        /* O Ponto de Luz atrás da aliança */
+        .spotlight {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, rgba(212,175,55,0.15) 0%, rgba(0,0,0,0) 70%);
+            z-index: 1;
+        }
+
+        .product-card img {
+            width: 110%; /* Ligeiramente maior para destacar */
+            height: auto;
+            z-index: 2;
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover img { transform: translateY(-5px); }
+
+        .info h3 {
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--text-light);
+            margin-top: 5px;
+        }
+
+        .info span {
+            font-size: 0.6rem;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        /* Banner de Info */
+        .info-banner {
+            background: #111;
+            margin: 20px 15px;
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .info-banner h4 { color: var(--primary); margin-bottom: 10px; font-family: 'Cinzel'; }
+        .info-banner p { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 5px; }
+
+        /* Botão WhatsApp Flutuante */
+        .wa-float {
+            position: fixed;
+            bottom: 25px;
+            right: 20px;
+            background: #25d366;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            z-index: 1000;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        footer {
+            padding: 60px 20px 120px;
+            text-align: center;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            letter-spacing: 2px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1 data-aos="fade-down">RZ_JOIAS</h1>
+        <p data-aos="fade-up" style="letter-spacing: 2px; font-size: 0.7rem; color: var(--primary);">EXCELLENCE IN JEWELRY</p>
+    </header>
+
+    <div class="info-banner" data-aos="zoom-in">
+        <h4>✨ Qualidade RZ_JOIAS</h4>
+        <p>• Prata 950 Legítima / Ouro 18k</p>
+        <p>• Acabamento interno anatômico</p>
+        <p>• Gravação inclusa de cortesia</p>
+    </div>
+
+    <!-- Seções serão preenchidas pelo JS -->
+    <section class="category-section">
+        <h2 class="category-title">Linha Essencial</h2>
+        <div class="grid" id="cat-essencial"></div>
+    </section>
+
+    <section class="category-section">
+        <h2 class="category-title">Linha Brilhante</h2>
+        <div class="grid" id="cat-brilhante"></div>
+    </section>
+
+    <section class="category-section">
+        <h2 class="category-title">Texturas & Conceito</h2>
+        <div class="grid" id="cat-textura"></div>
+    </section>
+
+    <section class="category-section">
+        <h2 class="category-title">Romântica & Trabalhada</h2>
+        <div class="grid" id="cat-romantica"></div>
+    </section>
+
+    <footer>
+        RZ_JOIAS © 2024<br>
+        DESIGNED FOR LUXURY EXPERIENCE
+    </footer>
+
+    <a href="https://wa.me/553498702856" class="wa-float">
+        <svg width="30" height="30" fill="white" viewBox="0 0 16 16">
+            <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93a7.898 7.898 0 0 0-2.327-5.507z"/>
+        </svg>
+    </a>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: true });
+
+        const produtos = [
+            { id: 1, nome: "Clássica", cat: "cat-essencial" },
+            { id: 2, nome: "Fosca", cat: "cat-essencial" },
+            { id: 3, nome: "Linha Central", cat: "cat-essencial" },
+            { id: 6, nome: "Linhas Paralelas", cat: "cat-essencial" },
+            { id: 16, nome: "Tripla Linha", cat: "cat-essencial" },
+            
+            { id: 4, nome: "Ponto de Luz", cat: "cat-brilhante" },
+            { id: 7, nome: "Meia Aliança", cat: "cat-brilhante" },
+            { id: 13, nome: "Quadrada", cat: "cat-brilhante" },
+            { id: 18, nome: "Escovada", cat: "cat-brilhante" },
+            { id: 20, nome: "Canelada", cat: "cat-brilhante" },
+            
+            { id: 5, nome: "Diamantada", cat: "cat-textura" },
+            { id: 8, nome: "Diamantada Fachetada", cat: "cat-textura" },
+            { id: 9, nome: "Fosca com Friso", cat: "cat-textura" },
+            { id: 12, nome: "Texturizada", cat: "cat-textura" },
+            { id: 17, nome: "Marteleada", cat: "cat-textura" },
+            
+            { id: 10, nome: "Coração", cat: "cat-romantica" },
+            { id: 11, nome: "Ondas", cat: "cat-romantica" },
+            { id: 14, nome: "Diagonal", cat: "cat-romantica" },
+            { id: 15, nome: "Milgrain", cat: "cat-romantica" },
+            { id: 19, nome: "Infinito", cat: "cat-romantica" }
+        ];
+
+        const phone = "553498702856";
+
+        produtos.forEach(p => {
+            const container = document.getElementById(p.cat);
+            const msg = encodeURIComponent(`Olá RZ_JOIAS! Gostaria de mais informações sobre o modelo ${p.id} (${p.nome}).`);
+            
+            const card = document.createElement('a');
+            card.href = `https://wa.me/${phone}?text=${msg}`;
+            card.className = "product-card";
+            card.setAttribute('data-aos', 'fade-up');
+            
+            card.innerHTML = `
+                <div class="img-wrapper">
+                    <div class="spotlight"></div>
+                    <img src="fotos/${p.id}.png" alt="${p.nome}" loading="lazy">
+                </div>
+                <div class="info">
+                    <span>MODELO ${p.id.toString().padStart(2, '0')}</span>
+                    <h3>${p.nome}</h3>
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    </script>
+</body>
+</html>

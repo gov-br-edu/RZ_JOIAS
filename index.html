@@ -3,291 +3,310 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RZ_JOIAS | Catálogo Oficial</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <title>RZ_JOIAS | Exclusive Experience</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@200;400;600&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
         :root {
             --primary: #d4af37; 
-            --bg: #080808;
-            --card-bg: radial-gradient(circle at center, #1a1a1a 0%, #0d0d0d 100%);
-            --text-light: #ffffff;
-            --text-muted: #999;
+            --primary-glow: rgba(212, 175, 55, 0.4);
+            --bg: #050505;
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
         body {
             background-color: var(--bg);
-            color: var(--text-light);
+            color: #fff;
             font-family: 'Montserrat', sans-serif;
-            line-height: 1.5;
+            overflow-x: hidden;
+            /* Fundo sutil de gradiente que se move */
+            background: radial-gradient(circle at 50% 50%, #111 0%, #050505 100%);
         }
 
-        /* Header */
+        /* Header com animação de letras */
         header {
-            padding: 60px 20px 30px;
+            height: 40vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
-            background: linear-gradient(to bottom, #111, var(--bg));
+            perspective: 1000px;
         }
 
         header h1 {
             font-family: 'Cinzel', serif;
-            font-size: 2.2rem;
+            font-size: 2.8rem;
             color: var(--primary);
-            letter-spacing: 6px;
-            margin-bottom: 10px;
+            letter-spacing: 12px;
+            text-shadow: 0 0 30px var(--primary-glow);
+            animation: titleEntrance 2s ease-out forwards;
         }
 
-        header p {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            color: var(--text-muted);
+        @keyframes titleEntrance {
+            from { opacity: 0; letter-spacing: 25px; transform: translateZ(-100px); }
+            to { opacity: 1; letter-spacing: 12px; transform: translateZ(0); }
         }
 
-        /* Search Bar */
-        .search-container {
-            padding: 0 20px 20px;
-            max-width: 500px;
+        /* Barra de Busca Estilizada */
+        .search-area {
+            padding: 0 20px 40px;
+            max-width: 400px;
             margin: 0 auto;
         }
 
         #modelSearch {
             width: 100%;
-            padding: 12px 20px;
-            background: #151515;
-            border: 1px solid #333;
-            border-radius: 30px;
+            padding: 15px 25px;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 2px; /* Design mais reto/luxuoso */
             color: white;
-            font-family: 'Montserrat';
-            outline: none;
-            transition: border-color 0.3s;
+            backdrop-filter: blur(10px);
+            text-align: center;
+            letter-spacing: 2px;
+            font-size: 0.7rem;
+            text-transform: uppercase;
         }
 
-        #modelSearch:focus { border-color: var(--primary); }
-
         /* Grid */
-        .catalog-container {
-            padding: 10px 15px 100px;
+        .catalog {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            max-width: 800px;
+            gap: 20px;
+            padding: 0 20px 100px;
+            max-width: 900px;
             margin: 0 auto;
         }
 
-        /* Card */
-        .ring-card {
-            background: var(--card-bg);
-            border-radius: 18px;
-            padding: 15px;
+        /* Card Flutuante */
+        .card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 4px;
+            padding: 20px 15px;
             text-decoration: none;
             color: inherit;
             position: relative;
-            border: 1px solid #1a1a1a;
+            backdrop-filter: blur(5px);
             display: flex;
             flex-direction: column;
-            transition: all 0.3s ease;
+            align-items: center;
+            /* Animação de flutuação */
+            animation: float 6s ease-in-out infinite;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
-        .ring-card:active { transform: scale(0.96); border-color: var(--primary); }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
 
-        .img-box {
+        .card:active { transform: scale(0.95); border-color: var(--primary); }
+
+        /* Container da Imagem e Efeito Shine */
+        .img-container {
             width: 100%;
             aspect-ratio: 1/1;
+            position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
-            margin-bottom: 10px;
+            overflow: hidden; /* Corta o feixe de luz nas bordas */
         }
 
-        .spotlight {
-            position: absolute;
-            width: 80%;
-            height: 80%;
-            background: radial-gradient(circle, rgba(212,175,55,0.12) 0%, rgba(0,0,0,0) 70%);
-            z-index: 1;
-        }
-
-        .ring-card img {
+        .img-container img {
             width: 100%;
             height: auto;
             z-index: 2;
-            filter: drop-shadow(0 8px 12px rgba(0,0,0,0.6));
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.8));
         }
 
-        .width-badge {
+        /* O Feixe de Luz (Shine) */
+        .shine-effect {
             position: absolute;
-            top: 10px;
-            right: 10px;
-            background: rgba(0,0,0,0.6);
-            color: var(--primary);
-            font-size: 0.6rem;
-            padding: 3px 7px;
-            border-radius: 5px;
-            font-weight: 600;
-            border: 0.5px solid var(--primary);
+            top: -100%;
+            left: -100%;
+            width: 300%;
+            height: 300%;
+            background: linear-gradient(
+                45deg,
+                rgba(255,255,255,0) 45%,
+                rgba(255,255,255,0.2) 50%,
+                rgba(255,255,255,0) 55%
+            );
             z-index: 3;
+            transform: rotate(-45deg);
+            animation: shineMove 6s infinite;
+            pointer-events: none;
         }
 
-        .info { text-align: center; }
+        @keyframes shineMove {
+            0% { transform: translate(-100%, -100%) rotate(-45deg); }
+            20%, 100% { transform: translate(100%, 100%) rotate(-45deg); }
+        }
 
-        .info .model-id {
-            display: block;
-            font-size: 0.6rem;
+        /* Detalhes do Modelo */
+        .info { text-align: center; margin-top: 15px; }
+        
+        .model-number {
+            font-size: 0.55rem;
             color: var(--primary);
-            font-weight: 700;
-            margin-bottom: 2px;
-        }
-
-        .info .model-name {
-            font-family: 'Cinzel', serif;
-            font-size: 0.9rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-            margin-bottom: 6px;
-        }
-
-        .info .description {
-            font-size: 0.65rem;
-            color: var(--text-muted);
-            line-height: 1.3;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        /* Floating Contact */
-        .cta-button {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 90%;
-            max-width: 400px;
-            background: #25d366;
-            color: white;
-            text-align: center;
-            padding: 15px;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
-            z-index: 100;
-            text-decoration: none;
-            letter-spacing: 1px;
-        }
-
-        footer {
-            text-align: center;
-            padding: 40px 20px 120px;
-            color: #444;
-            font-size: 0.7rem;
+            font-weight: bold;
             letter-spacing: 2px;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .model-name {
+            font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            font-weight: bold;
+        }
+
+        .mm-tag {
+            font-size: 0.6rem;
+            color: #666;
+            margin-top: 4px;
+            display: block;
+        }
+
+        /* Botão WhatsApp Flutuante Minimalista */
+        .wa-float {
+            position: fixed;
+            bottom: 30px;
+            right: 25px;
+            width: 55px;
+            height: 55px;
+            background: #25d366;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            z-index: 999;
+            animation: waPulse 2s infinite;
+        }
+
+        @keyframes waPulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.6); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        /* Footer */
+        footer {
+            padding: 50px 0 120px;
+            text-align: center;
+            font-size: 0.6rem;
+            color: #333;
+            letter-spacing: 4px;
+            text-transform: uppercase;
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1 data-aos="fade-down">RZ_JOIAS</h1>
-        <p data-aos="fade-up">Catálogo Exclusive 2024</p>
+        <h1 data-aos="zoom-out">RZ_JOIAS</h1>
+        <p style="color: #444; font-size: 0.6rem; letter-spacing: 5px; margin-top: 10px;">EXCELLENCE & ARTISTRY</p>
     </header>
 
-    <div class="search-container">
-        <input type="text" id="modelSearch" placeholder="🔍 Buscar modelo ou número...">
+    <div class="search-area">
+        <input type="text" id="modelSearch" placeholder="Encontrar modelo...">
     </div>
 
-    <div class="catalog-container" id="catalog">
-        <!-- JS irá renderizar aqui -->
+    <div class="catalog" id="mainGrid">
+        <!-- JS irá preencher aqui -->
     </div>
-
-    <a href="https://wa.me/553498702856?text=Olá RZ_JOIAS! Gostaria de um orçamento." class="cta-button">
-        FALAR COM CONSULTOR
-    </a>
 
     <footer>
-        QUALIDADE EM CADA DETALHE<br>UBERLÂNDIA - MG
+        Handcrafted with Passion<br>
+        RZ_JOIAS 2024
     </footer>
+
+    <!-- Botão WhatsApp Voltou ao canto -->
+    <a href="https://wa.me/553498702856" class="wa-float">
+        <svg width="28" height="28" fill="white" viewBox="0 0 16 16">
+            <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93a7.898 7.898 0 0 0-2.327-5.507z"/>
+        </svg>
+    </a>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init({ duration: 800, once: true });
+        AOS.init({ duration: 1200, once: true });
 
         const modelos = [
-            { id: 1, nome: "LIBRA", larg: "5.0 mm", desc: "Acabamento texturizado marcante com friso polido e pedra central." },
-            { id: 2, nome: "COLOMBIA", larg: "5.5 mm", desc: "Frisos duplos paralelos com centro texturizado de brilho único." },
-            { id: 3, nome: "AM 20", larg: "2.0 mm", desc: "Clássica polida de alto brilho, design delicado e minimalista." },
-            { id: 4, nome: "AM 25", larg: "2.5 mm", desc: "Tradicional espelhada, equilíbrio perfeito entre sutileza e presença." },
-            { id: 5, nome: "AM 30", larg: "3.0 mm", desc: "Aliança lisa tradicional na espessura intermediária mais procurada." },
-            { id: 6, nome: "AM 40", larg: "4.0 mm", desc: "Modelo liso robusto com excelente destaque visual e acabamento impecável." },
-            { id: 7, nome: "AM 50", larg: "5.0 mm", desc: "Imponente, larga e tradicional, com acabamento totalmente anatômico." },
-            { id: 8, nome: "LOVE", larg: "6.0 mm", desc: "Design trabalhado fosco com um lindo vazado em coração cravejado." },
-            { id: 9, nome: "RTA 40", larg: "4.0 mm", desc: "Design reto moderno espelhado com sofisticado ponto de luz central." },
-            { id: 10, nome: "SAINT", larg: "4.60 mm", desc: "Textura diamantada fina combinada com friso central e pedra de destaque." },
-            { id: 11, nome: "OUSADA", larg: "5.0 mm", desc: "Design polido com relevo abaulado marcante, perfeito para casais com atitude." },
-            { id: 12, nome: "MILLA", larg: "6.0 mm", desc: "Modelo robusto texturizado com linhas marcadas e zircônia central." },
-            { id: 13, nome: "HADARA", larg: "4.0 mm", desc: "Acabamento jateado com brilho cintilante contínuo e laterais polidas." },
-            { id: 14, nome: "DREAM", larg: "4.3 mm", desc: "Linhas cruzadas fluidas com acabamento diamantado e ponto de luz." },
-            { id: 15, nome: "CADORE", larg: "5.5 mm", desc: "Detalhes foscos robustos com frisos triplos que conferem imponência." },
-            { id: 16, nome: "ALTARIA", larg: "6.0 mm", desc: "Laterais chanfradas polidas com pedra centralizada em destaque." },
-            { id: 17, nome: "BELATRIX", larg: "4.0 mm", desc: "Estilo reto com delicado friso e ponto de luz lateralizado." },
-            { id: 18, nome: "ANGEL", larg: "4.0 mm", desc: "Acabamento acetinado premium contrastando com detalhe circular polido." },
-            { id: 19, nome: "SOL", larg: "4.0 mm", desc: "Brilho radiante em toda a superfície com textura jateada de alta durabilidade." },
-            { id: 20, nome: "KLONY", larg: "4.0 mm", desc: "Dois frisos profundos esculpidos sobre base ricamente texturizada." },
-            { id: 21, nome: "GRÉCIA", larg: "3.0 mm", desc: "Charme do acabamento misto: sofisticação fosca e brilho polido." },
-            { id: 22, nome: "TURQUIA", larg: "3.0 mm", desc: "Design anatômico curvo e entrelaçado com movimento elegante." },
-            { id: 23, nome: "ITÁLIA", larg: "4.0 mm", desc: "Contraste luxuoso entre laterais polidas e centro fosco trabalhado." },
-            { id: 24, nome: "ÍNDIA", larg: "3.0 mm", desc: "Linhas retas e fendas profundas que refletem o brilho geométrico." },
-            { id: 25, nome: "FRANÇA", larg: "3.0 mm", desc: "Acabamento diamantado refinado com elegantes frisos transversais." },
-            { id: 26, nome: "ESPANHA", larg: "3.0 mm", desc: "Bela composição minimalista dividida por um friso preciso." }
+            { id: 1, nome: "LIBRA", larg: "5.0 mm" },
+            { id: 2, nome: "COLOMBIA", larg: "5.5 mm" },
+            { id: 3, nome: "AM 20", larg: "2.0 mm" },
+            { id: 4, nome: "AM 25", larg: "2.5 mm" },
+            { id: 5, nome: "AM 30", larg: "3.0 mm" },
+            { id: 6, nome: "AM 40", larg: "4.0 mm" },
+            { id: 7, nome: "AM 50", larg: "5.0 mm" },
+            { id: 8, nome: "LOVE", larg: "6.0 mm" },
+            { id: 9, nome: "RTA 40", larg: "4.0 mm" },
+            { id: 10, nome: "SAINT", larg: "4.60 mm" },
+            { id: 11, nome: "OUSADA", larg: "5.0 mm" },
+            { id: 12, nome: "MILLA", larg: "6.0 mm" },
+            { id: 13, nome: "HADARA", larg: "4.0 mm" },
+            { id: 14, nome: "DREAM", larg: "4.3 mm" },
+            { id: 15, nome: "CADORE", larg: "5.5 mm" },
+            { id: 16, nome: "ALTARIA", larg: "6.0 mm" },
+            { id: 17, nome: "BELATRIX", larg: "4.0 mm" },
+            { id: 18, nome: "ANGEL", larg: "4.0 mm" },
+            { id: 19, nome: "SOL", larg: "4.0 mm" },
+            { id: 20, nome: "KLONY", larg: "4.0 mm" },
+            { id: 21, nome: "GRÉCIA", larg: "3.0 mm" },
+            { id: 22, nome: "TURQUIA", larg: "3.0 mm" },
+            { id: 23, nome: "ITÁLIA", larg: "4.0 mm" },
+            { id: 24, nome: "ÍNDIA", larg: "3.0 mm" },
+            { id: 25, nome: "FRANÇA", larg: "3.0 mm" },
+            { id: 26, nome: "ESPANHA", larg: "3.0 mm" }
         ];
 
-        const catalog = document.getElementById('catalog');
-        const searchInput = document.getElementById('modelSearch');
+        const grid = document.getElementById('mainGrid');
+        const search = document.getElementById('modelSearch');
 
-        function render(items) {
-            catalog.innerHTML = '';
-            items.forEach(p => {
-                const num = p.id.toString().padStart(2, '0');
-                const waMsg = encodeURIComponent(`Olá RZ_JOIAS! Tenho interesse no Modelo ${num} | ${p.nome}.`);
+        function draw(list) {
+            grid.innerHTML = '';
+            list.forEach((m, index) => {
+                const waUrl = `https://wa.me/553498702856?text=Olá! Gostaria de informações sobre o Modelo ${m.id} (${m.nome})`;
                 
-                // Caminho da imagem: fotos1/download (X).png
-                // Usamos encodeURIComponent para lidar com os parênteses e espaços no nome do arquivo
-                const imgPath = `fotos1/download%20(${p.id}).png`;
+                // Variamos a duração da flutuação para cada card
+                const floatDuration = (5 + Math.random() * 3).toFixed(2);
+                const floatDelay = (Math.random() * 5).toFixed(2);
 
-                catalog.innerHTML += `
-                    <a href="https://wa.me/553498702856?text=${waMsg}" class="ring-card" data-aos="fade-up">
-                        <span class="width-badge">${p.larg}</span>
-                        <div class="img-box">
-                            <div class="spotlight"></div>
-                            <img src="${imgPath}" alt="${p.nome}" loading="lazy">
+                grid.innerHTML += `
+                    <a href="${waUrl}" class="card" 
+                       style="animation-duration: ${floatDuration}s; animation-delay: ${floatDelay}s;"
+                       data-aos="fade-up">
+                        <div class="img-container">
+                            <div class="shine-effect"></div>
+                            <img src="fotos1/download%20(${m.id}).png" alt="${m.nome}" loading="lazy">
                         </div>
                         <div class="info">
-                            <span class="model-id">MODELO ${num}</span>
-                            <span class="model-name">${p.nome}</span>
-                            <p class="description">${p.desc}</p>
+                            <span class="model-number">MODEL ${m.id.toString().padStart(2, '0')}</span>
+                            <span class="model-name">${m.nome}</span>
+                            <span class="mm-tag">${m.larg}</span>
                         </div>
                     </a>
                 `;
             });
         }
 
-        // Busca
-        searchInput.addEventListener('input', (e) => {
-            const term = e.target.value.toLowerCase();
-            const filtered = modelos.filter(m => 
-                m.nome.toLowerCase().includes(term) || 
-                m.id.toString().includes(term)
-            );
-            render(filtered);
+        search.addEventListener('input', (e) => {
+            const val = e.target.value.toLowerCase();
+            const filter = modelos.filter(m => m.nome.toLowerCase().includes(val) || m.id.toString() === val);
+            draw(filter);
         });
 
-        render(modelos);
+        draw(modelos);
     </script>
 </body>
 </html>
